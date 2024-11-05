@@ -1,0 +1,55 @@
+./node_modules/.bin/ajv validate -s app-config-schema.json -c ajv-formats -c ajv-keywords -d flag-set-minimal.yml --all-errors --strict=false
+schema app-config-schema.json is invalid
+error: Invalid regular expression: /^[a-z][a-zA-Z\d-_]{0,63}$/u: Invalid character class
+
+./node_modules/.bin/ajv validate -s app-config-schema-modified1.json -c ajv-formats -c ajv-keywords -d flag-set-minimal.yml --all-errors --strict=false
+flag-set-minimal.yml invalid
+[
+  {
+    instancePath: '',
+    schemaPath: '#/additionalProperties',
+    keyword: 'additionalProperties',
+    params: { additionalProperty: 'version' },
+    message: 'must NOT have additional properties'
+  }
+]
+
+./node_modules/.bin/ajv validate -s app-config-schema-modified2.json -c ajv-formats -c ajv-keywords -d flag-set-minimal.yml --all-errors --strict=false
+flag-set-minimal.yml valid
+
+./node_modules/.bin/ajv validate -s app-config-schema.json -c ajv-formats -c ajv-keywords -d flag-set.yml --all-errors --strict=false
+schema app-config-schema.json is invalid
+error: Invalid regular expression: /^[a-z][a-zA-Z\d-_]{0,63}$/u: Invalid character class
+
+./node_modules/.bin/ajv validate -s app-config-schema-modified1.json -c ajv-formats -c ajv-keywords -d flag-set.yml --all-errors --strict=false
+flag-set.yml invalid
+[
+  {
+    instancePath: '',
+    schemaPath: '#/additionalProperties',
+    keyword: 'additionalProperties',
+    params: { additionalProperty: 'version' },
+    message: 'must NOT have additional properties'
+  },
+  {
+    instancePath: '',
+    schemaPath: '#/additionalProperties',
+    keyword: 'additionalProperties',
+    params: { additionalProperty: 'flags' },
+    message: 'must NOT have additional properties'
+  },
+  {
+    instancePath: '',
+    schemaPath: '#/additionalProperties',
+    keyword: 'additionalProperties',
+    params: { additionalProperty: 'values' },
+    message: 'must NOT have additional properties'
+  }
+]
+
+./node_modules/.bin/ajv validate -s app-config-schema-modified2.json -c ajv-formats -c ajv-keywords -d flag-set.yml --all-errors --strict=false
+flag-set.yml valid
+
+./node_modules/.bin/ajv validate -s app-config-schema-modified2.json -c ajv-formats -c ajv-keywords -d flag-set.yml --all-errors --strict=true
+schema app-config-schema-modified2.json is invalid
+error: strict mode: required property "pattern" is not defined at "#/definitions/stringConstraints/not" (strictRequired)

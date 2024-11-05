@@ -1,0 +1,21 @@
+version: "1"
+flags:
+  test-string-flag-key:
+    name: 'test-string-flag'
+    attributes:
+      test-string-attribute:
+        constraints:
+          type: string
+  test-bool-flag-key:
+    name: 'test-bool-flag'
+    attributes:
+      test-bool-attribute:
+        constraints:
+          type: boolean
+values:
+  test-string-flag-key:
+    enabled: true
+    test-string-attribute: 'wibble'
+  test-bool-flag-key:
+    enabled: true
+    test-bool-attribute: true
